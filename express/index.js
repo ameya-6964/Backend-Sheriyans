@@ -25,8 +25,8 @@ app.get("/add/:number1/:number2", function (req, res) {
 });
 
 // WildCard Route {Always This Should Be Last}
-app.get("*" ,function(req,res){
- res.json({"message":"Something Went Wront"}).status(500)
+app.get("*", function (req, res) {
+    res.json({ "message": "Something Went Wront" }).status(500)
 })
 app.listen(PORT, () => {
     console.log(`Server Started On Port ${PORT}`);
