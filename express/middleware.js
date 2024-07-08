@@ -1,10 +1,13 @@
 const express = require("express");
+const cors = require("cors")
 const app = express();
 const PORT = 3000;
 
-app.use(function(req,res,next){
- console.log(`${req.method}`);
- next();
+app.use(cors());
+
+app.use(function (req, res, next) {
+    console.log(`${req.method}`);
+    next();
 })
 
 app.get("/", function (req, res) {
