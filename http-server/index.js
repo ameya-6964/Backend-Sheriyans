@@ -1,9 +1,14 @@
 const http = require("http");
 
+let data = {
+    name:"Ameya",
+    age:12,
+}
 const server = http.createServer((req,res)=>{
     
    if(req.url === "/"){
-    res.end("Hello")
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(data));
    }
    if(req.url === "/about"){
     res.end("On About Page")
