@@ -21,6 +21,17 @@ app.get("/profile", function (req, res) {
     res.render('profile')
 })
 
+app.get("/calculate", function (req, res) {
+    res.render('calculate')
+})
+
+app.get("/sum", function (req, res) {
+    let number_1 = Number( req.query.number1)
+    let number_2 = Number(req.query.number2);
+    res.send(`Sum Is ${number_1 + number_2}`)
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server Started On Port ${PORT}`);
 })
