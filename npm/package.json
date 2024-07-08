@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "marvel-comics-characters": "^1.1.1"
+  },
+  "name": "backend-domination",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon marvel.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
