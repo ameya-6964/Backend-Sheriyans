@@ -50,6 +50,14 @@ app.post('/createtask', function (req, res) {
     })
 })
 
+app.get('/hisaab/:filename', function (req, res) {
+    let fileName = req.params.filename;
+    fs.readFile(`./files/${fileName}`,"utf-8",function(err,fileData){
+        if (err) return res.status(500).send(err);
+        res.render("hisaab",{fileData,fileName})
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`Server Started On Port ${PORT}`);
 })
