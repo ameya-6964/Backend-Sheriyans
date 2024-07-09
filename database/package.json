@@ -12,6 +12,7 @@
   "author": "Ameya",
   "license": "ISC",
   "dependencies": {
+    "debug": "^4.3.5",
     "express": "^4.19.2",
     "mongoose": "^8.5.0"
   }
