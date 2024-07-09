@@ -26,18 +26,18 @@ app.get('/create', function (req, res) {
 
 app.get('/edit/:filename', function (req, res) {
     let fileName = req.params.filename;
-    fs.readFile(`files/${fileName}`,"utf-8" ,(err,fileData)=>{
-        if(err){
+    fs.readFile(`files/${fileName}`, "utf-8", (err, fileData) => {
+        if (err) {
             return res.status(500).send(err);
         }
-        res.render("edit",{fileData,fileName})
+        res.render("edit", { fileData, fileName })
     })
 })
 
 
 app.post('/update/:filename', function (req, res) {
     let fileName = req.params.filename;
-    fs.writeFile(`./files/${fileName}`, req.body.content, function(err){
+    fs.writeFile(`./files/${fileName}`, req.body.content, function (err) {
         if (err) return res.status(500).send(err);
     })
     res.redirect("/")
@@ -52,9 +52,17 @@ app.post('/createtask', function (req, res) {
 
 app.get('/hisaab/:filename', function (req, res) {
     let fileName = req.params.filename;
-    fs.readFile(`./files/${fileName}`,"utf-8",function(err,fileData){
+    fs.readFile(`./files/${fileName}`, "utf-8", function (err, fileData) {
         if (err) return res.status(500).send(err);
-        res.render("hisaab",{fileData,fileName})
+        res.render("hisaab", { fileData, fileName })
+    })
+})
+
+app.get('/delete/:filename', function (req, res) {
+    let fileName = req.params.filename;
+    fs.unlink(`./files/${fileName}`, function (err) {
+        if (err) return res.status(500).send(err);
+        res.redirect("/")
     })
 })
 
