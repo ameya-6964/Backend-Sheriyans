@@ -44,6 +44,11 @@ app.get("/lessequal", async function (req, res) {
     res.send(filteredUsers)
 })
 
+app.get("/in", async function (req, res) {
+    let filteredUsers = await userModel.find({age:{ $in : [23,27,29] }});
+    res.send(filteredUsers)
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server Started On Port ${PORT}`);
