@@ -1,10 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcrypt")
-const app = express();
+const jwt = require("jsonwebtoken")
+const cookieParser = require("cookie-parser");
 const PORT = 3000;
 
+const app = express();
 app.use(express.json());
-app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
+app.use(express.urlencoded({ extended: true }))
 
 app.get("/", (req, res) => {
     res.send("Helllo")
@@ -22,6 +25,21 @@ app.post("/check", async (req, res) => {
     let encryptedPassword = await bcrypt.hash(pasword, salt);
     let result = await bcrypt.compare(pasword, encryptedPassword)
     res.send(result);
+})
+
+app.get("/tokenmaker", async (req, res) => {
+    let token = jwt.sign({ name: "Ameya" }, "123456789");
+    res.cookie("token", token, {
+        httpOnly: true,
+        maxAge: 3600000 // 1 hour
+    });
+    res.send(token);
+})
+
+app.get("/fetchdata", async (req, res) => {
+    let {token} = req.cookies;
+    let data = jwt.decode(token,"123456789");
+    res.send(data);
 })
 
 
