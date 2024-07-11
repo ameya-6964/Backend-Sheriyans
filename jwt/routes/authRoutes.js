@@ -6,6 +6,8 @@ const {
     logoutUser,
     getUserProfile } = require("../controllers/authController")
 
+
+const {protect} = require("../middlewares/protect")    
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -18,6 +20,6 @@ router.post("/login",loginUser)
 
 router.post("/logout",logoutUser)
 
-router.get("/profile",getUserProfile)
+router.get("/profile", protect , getUserProfile)
 
 module.exports = router;
