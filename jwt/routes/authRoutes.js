@@ -12,11 +12,11 @@ router.get("/", (req, res) => {
     res.send("On Auth Route")
 })
 
-router.get("/register",registerUser)
+router.post("/register",registerUser)
 
-router.get("/login",loginUser)
+router.post("/login",loginUser)
 
-router.get("/logout",logoutUser)
+router.post("/logout",logoutUser)
 
 router.get("/profile",getUserProfile)
 
