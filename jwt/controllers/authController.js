@@ -32,11 +32,38 @@ module.exports.registerUser = async (req, res) => {
     }
 }
 
-module.exports.loginUser = (req, res) => {
-    res.send("On Login Route")
+module.exports.loginUser = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        let user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(500).send("Incorrect Email Or Password");
+        }
+
+        let result = await bcrypt.compare(password, user.password)
+
+        if (result) {
+            let token = generateToken({
+                email
+            });
+
+            res.cookie("token", token, { httpOnly: true })
+            res.status(200).send("Logged In Succesfully");
+        }
+        else {
+            return res.status(500).send("Incorrect Email Or Password");
+        }
+        
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+    
+    
 }
+
 module.exports.logoutUser = (req, res) => {
-    res.send("On Logout Route")
+    res.clearCookie("token")
+    res.status(200).send("Logged Out Succesfully");
 }
 module.exports.getUserProfile = (req, res) => {
     res.send("On Profile Route")
