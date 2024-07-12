@@ -32,7 +32,7 @@ app.use(passport.session());
 connectDb();
 
 //Routes
-app.use("/api/auth", authRouter)
+app.use("/auth", authRouter)
 
 app.listen(PORT, () => {
     console.log(`Server Started On Port 3000`);
